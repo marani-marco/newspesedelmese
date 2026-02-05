@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuove Spese del Mese</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Dashboard gruppo</p>
+          <h1>Spese mensili condivise</h1>
+          <p class="subtitle">
+            Tieni sotto controllo quanto hai speso e quanto devi ricevere dal gruppo.
+          </p>
+        </div>
+        <button id="open-settings" class="button ghost">Configura app</button>
+      </header>
+
+      <section class="summary">
+        <article class="summary-card">
+          <p class="summary-label">Totale speso da te</p>
+          <h2 id="total-spent">€ 0</h2>
+          <p class="summary-helper">Nel periodo selezionato</p>
+        </article>
+        <article class="summary-card">
+          <p class="summary-label">Da ricevere dal gruppo</p>
+          <h2 id="total-receive">€ 0</h2>
+          <p class="summary-helper">Somma delle quote dovute</p>
+        </article>
+        <article class="summary-card accent">
+          <p class="summary-label">Utente attivo</p>
+          <h2 id="current-user">Luca</h2>
+          <p class="summary-helper">Puoi cambiare utente in futuro</p>
+        </article>
+      </section>
+
+      <section class="filters">
+        <div class="filter-group">
+          <label for="month-select">Mese</label>
+          <select id="month-select"></select>
+        </div>
+        <div class="filter-group">
+          <label for="year-select">Anno</label>
+          <select id="year-select"></select>
+        </div>
+        <div class="filter-group search">
+          <label for="search-input">Ricerca</label>
+          <input id="search-input" type="search" placeholder="Cerca per descrizione o utente..." />
+        </div>
+      </section>
+
+      <main class="content">
+        <section class="expense-list">
+          <div class="section-header">
+            <div>
+              <h3>Spese del mese</h3>
+              <p>Modifica o elimina rapidamente le spese registrate.</p>
+            </div>
+            <span id="expense-count" class="badge">0 spese</span>
+          </div>
+          <div id="expense-cards" class="cards"></div>
+        </section>
+
+        <aside class="editor">
+          <div class="section-header">
+            <div>
+              <h3>Modifica spesa</h3>
+              <p>Aggiorna i dettagli della spesa selezionata.</p>
+            </div>
+          </div>
+          <form id="expense-form">
+            <input type="hidden" id="expense-id" />
+            <label>
+              Tipo
+              <select id="type-input"></select>
+            </label>
+            <label>
+              Importo (€)
+              <input id="amount-input" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Descrizione
+              <input id="description-input" type="text" required />
+            </label>
+            <div class="two-columns">
+              <label>
+                Mese
+                <select id="month-input"></select>
+              </label>
+              <label>
+                Anno
+                <select id="year-input"></select>
+              </label>
+            </div>
+            <label>
+              Utente che ha pagato
+              <select id="paidby-input"></select>
+            </label>
+            <label>
+              Modalità addebito
+              <select id="split-input">
+                <option value="shared">Divisa tra partecipanti</option>
+                <option value="full">Interamente addebitata</option>
+              </select>
+            </label>
+            <label>
+              Utenti che devono restituire
+              <select id="owedby-input" multiple></select>
+            </label>
+            <button class="button primary" type="submit">Salva modifiche</button>
+            <p class="form-helper">Le modifiche restano in memoria locale per questa demo.</p>
+          </form>
+        </aside>
+      </main>
+    </div>
+
+    <div id="settings-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Configura app</h3>
+          <button id="close-settings" class="icon-button">✕</button>
+        </div>
+        <p>Gestisci i tipi di spesa disponibili per il gruppo.</p>
+        <div class="modal-body">
+          <label>
+            Nuovo tipo
+            <input id="new-type" type="text" placeholder="Es. Abbonamenti" />
+          </label>
+          <button id="add-type" class="button primary">Aggiungi tipo</button>
+        </div>
+        <ul id="type-list" class="type-list"></ul>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
